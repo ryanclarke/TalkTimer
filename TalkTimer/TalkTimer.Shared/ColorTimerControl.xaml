@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="TalkTimer.ColorTimerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TalkTimer"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="Monospace"
+    d:DesignHeight="900"
+    d:DesignWidth="1366">
+
+    <Grid x:Name="ColorBox"
+          Tapped="ColorBox_Tapped">
+        <Viewbox Stretch="Uniform"
+                 StretchDirection="Both"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal"
+                        Margin="0,0,0,-100">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="LineHeight" Value="1100"/>
+                        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock x:Name="LargeNumber"
+                   Foreground="DarkSlateGray"
+                   Text="0"
+                   FontSize="1000"/>
+                <TextBlock x:Name="SmallNumber"
+                   Foreground="DarkSlateGray"
+                   Text="00"
+                   FontSize="100"/>
+            </StackPanel>
+        </Viewbox>
+    </Grid>
+</UserControl>
