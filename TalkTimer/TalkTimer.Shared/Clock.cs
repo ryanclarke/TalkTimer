@@ -64,5 +64,15 @@
         {
             return seconds % SecondsPerMinute;
         }
+
+        internal void IncrementMinute()
+        {
+            _seconds = _seconds + SecondsPerMinute;
+        }
+
+        internal void DecrementMinute()
+        {
+            _seconds = _seconds - SecondsPerMinute;
+        }
     }
 }

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,7 +22,7 @@ namespace TalkTimer
 {
     public sealed partial class ColorTimerControl : UserControl
     {
-        private const int _minutes = 10;
+        private int _minutes = 10;
         private Clock _clock;
         private DispatcherTimer _timer;
 
@@ -33,6 +34,8 @@ namespace TalkTimer
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Tick += timer_Tick;
+
+            LargeNumber.RenderTransform = new TranslateTransform();
 
             UpdateCounterUI();
         }
@@ -105,6 +108,42 @@ namespace TalkTimer
                 LargeNumber.Text = _clock.Minutes;
                 SmallNumber.Text = _clock.Seconds;
             }
+        }
+
+        private void LargeNumber_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            if (_timer.IsEnabled) return;
+
+            var x = e.Cumulative.Translation.X;
+            var y = e.Cumulative.Translation.Y;
+
+            if (Math.Abs(y) > Math.Abs(x))
+            {
+                if (Math.Abs(y) > Window.Current.Bounds.Height / 10)
+                {
+                    e.Complete();
+                    if (y < 0)
+                    {
+                        _minutes++;
+                    }
+                    if (y > 0)
+                    {
+                        _minutes--;
+                    }
+                    _clock.Set(_minutes);
+                    UpdateCounterUI();
+                }
+                else
+                {
+                    ((TranslateTransform)(sender as UIElement).RenderTransform).Y = y;
+                }
+            }
+        }
+
+        private void LargeNumber_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            var element = sender as UIElement;
+            ((TranslateTransform)element.RenderTransform).Y = element.RenderTransformOrigin.Y;
         }
     }
 }
