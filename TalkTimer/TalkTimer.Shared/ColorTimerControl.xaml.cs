@@ -20,11 +20,13 @@ using Windows.UI.Xaml.Navigation;
 
 namespace TalkTimer
 {
-    public sealed partial class ColorTimerControl : UserControl
+    public sealed partial class ColorTimerControl : UserControl, IPlayable
     {
         private int _minutes = 10;
         private Clock _clock;
         private DispatcherTimer _timer;
+
+        public event EventHandler Finished;
 
         public ColorTimerControl()
         {
@@ -37,28 +39,8 @@ namespace TalkTimer
 
             LargeNumber.RenderTransform = new TranslateTransform();
 
-            UpdateCounterUI();
-        }
-
-        private void ColorBox_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (_clock.IsInOvertime())
-            {
-                _timer.Stop();
-                _clock.Set(_minutes);
-                UpdateCounterUI();
-            }
-            else if (_clock.IsAt(_minutes))
-            {
-                StartTimer();
-            }
-        }
-
-        private void StartTimer()
-        {
-            _clock.Set(_minutes);
-
-            _timer.Start();
+            PlayerControls.Setup(this);
+            Finished += (s, e) => { };
 
             UpdateCounterUI();
         }
@@ -67,11 +49,12 @@ namespace TalkTimer
         {
             _clock.ElapseSecond();
             UpdateCounterUI();
+            if (_clock.IsInOvertime()) Finished(this, new EventArgs());
         }
 
         private void UpdateCounterUI()
         {
-            var clockColor = _timer.IsEnabled ? Colors.White : Colors.DarkSlateGray;
+            var clockColor = _timer.IsEnabled ? Colors.White : new Color { A = 68, R = 255, G = 255, B = 255 };
             LargeNumber.Foreground = new SolidColorBrush(clockColor);
             SmallNumber.Foreground = new SolidColorBrush(clockColor);
 
@@ -145,5 +128,40 @@ namespace TalkTimer
             var element = sender as UIElement;
             ((TranslateTransform)element.RenderTransform).Y = element.RenderTransformOrigin.Y;
         }
+
+        public void Play()
+        {
+            _clock.Set(_minutes);
+            _timer.Start();
+            UpdateCounterUI();
+        }
+
+        public void Pause()
+        {
+            _timer.Stop();
+            UpdateCounterUI();
+        }
+
+        public void Resume()
+        {
+            _timer.Start();
+            UpdateCounterUI();
+        }
+
+        public void Stop()
+        {
+            _timer.Stop();
+            _clock.Set(_minutes);
+            UpdateCounterUI();
+        }
     }
+
+    public interface IPlayable
+    {
+        void Play();
+        void Pause();
+        void Resume();
+        void Stop();
+        event EventHandler Finished;
+    } 
 }

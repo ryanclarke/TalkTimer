@@ -19,23 +19,59 @@ namespace TalkTimer
 {
     public sealed partial class PlayerControl : UserControl
     {
+        private IPlayable Timer;
+        private bool _isFinished;
+
         public PlayerControl()
         {
             this.InitializeComponent();
         }
 
-        private void PlayControl_Tapped(object sender, TappedRoutedEventArgs e)
+        public void Setup(IPlayable timer)
         {
-            //if (_clock.IsInOvertime())
-            //{
-            //    _timer.Stop();
-            //    _clock.Set(_minutes);
-            //    UpdateCounterUI();
-            //}
-            //else if (_clock.IsAt(_minutes))
-            //{
-            //    StartTimer();
-            //}
+            Timer = timer;
+            Timer.Finished += (s, e) =>
+            {
+                _isFinished = true;
+                StopButton.Visibility = Visibility.Visible;
+            };
+        }
+
+        private void PlayButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayButton.Visibility = Visibility.Collapsed;
+            PauseButton.Visibility = Visibility.Visible;
+            ResumeButton.Visibility = Visibility.Collapsed;
+            StopButton.Visibility = _isFinished ? Visibility.Visible : Visibility.Collapsed;
+            Timer.Play();
+        }
+
+        private void PauseButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayButton.Visibility = Visibility.Collapsed;
+            PauseButton.Visibility = Visibility.Collapsed;
+            ResumeButton.Visibility = Visibility.Visible;
+            StopButton.Visibility = Visibility.Visible;
+            Timer.Pause();
+        }
+
+        private void ResumeButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayButton.Visibility = Visibility.Collapsed;
+            PauseButton.Visibility = Visibility.Visible;
+            ResumeButton.Visibility = Visibility.Collapsed;
+            StopButton.Visibility = _isFinished ? Visibility.Visible : Visibility.Collapsed;
+            Timer.Resume();
+        }
+
+        private void StopButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PlayButton.Visibility = Visibility.Visible;
+            PauseButton.Visibility = Visibility.Collapsed;
+            ResumeButton.Visibility = Visibility.Collapsed;
+            StopButton.Visibility = Visibility.Collapsed;
+            Timer.Stop();
+            _isFinished = false;
         }
     }
 }
