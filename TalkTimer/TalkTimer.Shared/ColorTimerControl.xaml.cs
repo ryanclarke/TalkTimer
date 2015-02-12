@@ -60,7 +60,7 @@ namespace TalkTimer
 
             if (_clock.IsAt(_minutes))
             {
-                var backgroundColor = _timer.IsEnabled ? Colors.Green : Colors.Black;
+                var backgroundColor = _timer.IsEnabled ? Colors.DeepSkyBlue : Colors.Black;
                 ColorBox.Background = new SolidColorBrush(backgroundColor);
             }
             else if (_clock.JustPassed(2))
@@ -107,11 +107,11 @@ namespace TalkTimer
                     e.Complete();
                     if (y < 0)
                     {
-                        _minutes++;
+                        _minutes = _minutes + 1;
                     }
                     if (y > 0)
                     {
-                        _minutes--;
+                        _minutes = Math.Max(0, _minutes - 1);
                     }
                     _clock.Set(_minutes);
                     UpdateCounterUI();
