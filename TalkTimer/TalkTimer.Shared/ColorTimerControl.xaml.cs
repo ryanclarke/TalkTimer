@@ -37,7 +37,7 @@ namespace TalkTimer
             _timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Tick += timer_Tick;
 
-            LargeNumber.RenderTransform = new TranslateTransform();
+            LargeNumberGroup.RenderTransform = new TranslateTransform();
 
             PlayerControls.Setup(this);
             Finished += (s, e) => { };
@@ -93,7 +93,7 @@ namespace TalkTimer
             }
         }
 
-        private void LargeNumber_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void LargeNumberGroup_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             if (_timer.IsEnabled) return;
 
@@ -123,7 +123,7 @@ namespace TalkTimer
             }
         }
 
-        private void LargeNumber_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        private void LargeNumberGroup_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
             var element = sender as UIElement;
             ((TranslateTransform)element.RenderTransform).Y = element.RenderTransformOrigin.Y;
@@ -133,6 +133,8 @@ namespace TalkTimer
         {
             _clock.Set(_minutes);
             _timer.Start();
+            LargeNumberUpArrow.Visibility = Visibility.Collapsed;
+            LargeNumberDownArrow.Visibility = Visibility.Collapsed;
             UpdateCounterUI();
         }
 
@@ -152,6 +154,8 @@ namespace TalkTimer
         {
             _timer.Stop();
             _clock.Set(_minutes);
+            LargeNumberUpArrow.Visibility = Visibility.Visible;
+            LargeNumberDownArrow.Visibility = Visibility.Visible;
             UpdateCounterUI();
         }
     }

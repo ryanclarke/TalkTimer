@@ -1,38 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-
-  <Identity Name="d42fb76c-0b7b-4882-8eb9-11b2208f8a83"
-            Publisher="CN=Ryan"
-            Version="1.0.0.0" />
-
+  <Identity Name="d42fb76c-0b7b-4882-8eb9-11b2208f8a83" Publisher="CN=Ryan" Version="1.0.0.0" />
   <Properties>
     <DisplayName>TalkTimer.Windows</DisplayName>
     <PublisherDisplayName>Ryan</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.3.0</OSMinVersion>
     <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-        Executable="$targetnametoken$.exe"
-        EntryPoint="TalkTimer.Windows.App">
-        <m2:VisualElements
-            DisplayName="TalkTimer.Windows"
-            Square150x150Logo="Assets\Logo.png"
-            Square30x30Logo="Assets\SmallLogo.png"
-            Description="TalkTimer.Windows"
-            ForegroundText="light"
-            BackgroundColor="#464646">
-            <m2:SplashScreen Image="Assets\SplashScreen.png" />
-        </m2:VisualElements>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TalkTimer.Windows.App">
+      <m2:VisualElements DisplayName="TalkTimer.Windows" Square150x150Logo="Assets\Square150x150Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="TalkTimer.Windows" ForegroundText="light" BackgroundColor="#FFFFFF">
+        <m2:DefaultTile Square70x70Logo="Assets\Square70x70Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Wide310x150Logo="Assets\Wide310x150Logo.png">
+        </m2:DefaultTile>
+        <m2:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000000" />
+      </m2:VisualElements>
     </Application>
   </Applications>
   <Capabilities>
