@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -31,6 +32,8 @@ namespace TalkTimer
         public ColorTimerControl()
         {
             this.InitializeComponent();
+
+            VersionNumber.Text = CustomAttributeExtensions.GetCustomAttribute<AssemblyFileVersionAttribute>(typeof(App).GetTypeInfo().Assembly).Version;
 
             _clock = new Clock(_minutes);
             _timer = new DispatcherTimer();
@@ -157,6 +160,30 @@ namespace TalkTimer
             LargeNumberUpArrow.Visibility = Visibility.Visible;
             LargeNumberDownArrow.Visibility = Visibility.Visible;
             UpdateCounterUI();
+        }
+
+        private void Twitter_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Windows.System.Launcher.LaunchUriAsync(new Uri("https://twitter.com/RyanSClarke", UriKind.Absolute));
+        }
+
+        private void Email_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Windows.System.Launcher.LaunchUriAsync(new Uri("mailto://ryan+crosswind@ryanclarke.net?Crosswind", UriKind.Absolute));
+        }
+
+        private void iIcon_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (AboutDetail.Visibility == Visibility.Visible)
+            {
+                AboutDetail.Visibility = Visibility.Collapsed;
+                AboutPanel.Background = AboutSubtleBackground;
+            }
+            else
+            {
+                AboutDetail.Visibility = Visibility.Visible;
+                AboutPanel.Background = AboutBackground;
+            }
         }
     }
 
