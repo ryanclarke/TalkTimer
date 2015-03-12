@@ -57,7 +57,7 @@ namespace TalkTimer
 
         private void UpdateCounterUI()
         {
-            var clockColor = _timer.IsEnabled ? Colors.White : new Color { A = 68, R = 255, G = 255, B = 255 };
+            var clockColor = _timer.IsEnabled ? Colors.White : new Color { A = 102, R = 255, G = 255, B = 255 };
             LargeNumber.Foreground = new SolidColorBrush(clockColor);
             SmallNumber.Foreground = new SolidColorBrush(clockColor);
 
@@ -169,7 +169,7 @@ namespace TalkTimer
 
         private void Email_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("mailto://ryan+crosswind@ryanclarke.net?Crosswind", UriKind.Absolute));
+            Windows.System.Launcher.LaunchUriAsync(new Uri("mailto:ryan+talktimer@ryanclarke.net?Subject=TalkTimer", UriKind.Absolute));
         }
 
         private void iIcon_Tapped(object sender, TappedRoutedEventArgs e)
