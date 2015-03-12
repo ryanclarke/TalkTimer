@@ -121,7 +121,12 @@
                             <LineBreak />
                             <Run Text="• My wife, for guidance on colors" />
                             <LineBreak />
-                            <Run Text="• Templarian, for ModernUIIcons.com" />
+                            <Run Text="• Templarian, for" />
+                            <Hyperlink NavigateUri="http://modernuiicons.com">
+                                <Hyperlink.Inlines>
+                                    <Run Text="ModernUIIcons.com" />
+                                </Hyperlink.Inlines>
+                            </Hyperlink>
                         </TextBlock>
                         <TextBlock Text="support"
                                    Margin="0,12,0,6"
