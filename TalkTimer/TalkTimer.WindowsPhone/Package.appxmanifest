@@ -3,8 +3,8 @@
   <Identity Name="aa24802c-1bc8-4fd6-aecb-a0bc8aa8ee2c" Publisher="CN=Ryan" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="aa24802c-1bc8-4fd6-aecb-a0bc8aa8ee2c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>TalkTimer.WindowsPhone</DisplayName>
-    <PublisherDisplayName>Ryan</PublisherDisplayName>
+    <DisplayName>TalkTimer</DisplayName>
+    <PublisherDisplayName>Ryan Clarke</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TalkTimer.WindowsPhone.App">
-      <m3:VisualElements DisplayName="TalkTimer.WindowsPhone" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="TalkTimer.WindowsPhone" ForegroundText="light" BackgroundColor="transparent">
+      <m3:VisualElements DisplayName="TalkTimer" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\SmallLogo.png" Description="Simple countdown clock for timing lightning talks." ForegroundText="light" BackgroundColor="transparent">
         <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000000" />
@@ -26,7 +26,4 @@
       </m3:VisualElements>
     </Application>
   </Applications>
-  <Capabilities>
-    <Capability Name="internetClientServer" />
-  </Capabilities>
 </Package>
