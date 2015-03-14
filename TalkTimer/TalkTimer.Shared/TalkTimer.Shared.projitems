@@ -35,8 +35,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\alarm2.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\alarm.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\appbar.email.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\appbar.information.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\appbar.social.twitter.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Metal_Gong.mp3" />
   </ItemGroup>
 </Project>

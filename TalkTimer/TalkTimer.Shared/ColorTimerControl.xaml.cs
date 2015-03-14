@@ -27,6 +27,8 @@ namespace TalkTimer
         private Clock _clock;
         private DispatcherTimer _timer;
 
+        public bool AlarmIsSet { get; set; }
+
         public event EventHandler Finished;
 
         public ColorTimerControl()
@@ -42,6 +44,7 @@ namespace TalkTimer
 
             LargeNumberGroup.RenderTransform = new TranslateTransform();
 
+            AlarmIsSet = true;
             PlayerControls.Setup(this);
             Finished += (s, e) => { };
 
@@ -76,6 +79,7 @@ namespace TalkTimer
             }
             else if (_clock.IsAt(0))
             {
+                if (AlarmIsSet) Alarm.Play();
                 ColorBox.Background = new SolidColorBrush(Colors.Black);
             }
 
@@ -189,6 +193,7 @@ namespace TalkTimer
 
     public interface IPlayable
     {
+        bool AlarmIsSet { get; set; }
         void Play();
         void Pause();
         void Resume();

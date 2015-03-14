@@ -73,5 +73,19 @@ namespace TalkTimer
             Timer.Stop();
             _isFinished = false;
         }
+
+        private void AlarmOn_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            AlarmOn.Visibility = Visibility.Collapsed;
+            AlarmOff.Visibility = Visibility.Visible;
+            Timer.AlarmIsSet = false;
+        }
+
+        private void AlarmOff_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            AlarmOn.Visibility = Visibility.Visible;
+            AlarmOff.Visibility = Visibility.Collapsed;
+            Timer.AlarmIsSet = true;
+        }
     }
 }
