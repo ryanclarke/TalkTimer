@@ -2,7 +2,7 @@
 {
     public class Clock
     {
-        private const int SecondsPerMinute = 6;
+        private const int SecondsPerMinute = 60;
 
         private int _seconds;
 
