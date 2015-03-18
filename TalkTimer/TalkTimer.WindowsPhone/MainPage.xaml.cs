@@ -27,6 +27,8 @@ namespace TalkTimer
             this.InitializeComponent();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync();
         }
 
         /// <summary>
