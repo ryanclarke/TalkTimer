@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="aa24802c-1bc8-4fd6-aecb-a0bc8aa8ee2c" Publisher="CN=Ryan" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="aa24802c-1bc8-4fd6-aecb-a0bc8aa8ee2c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="44304RyanClarke.TalkTimer" Publisher="CN=9B218B6F-084E-4645-B272-56D8A30FEA03" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="ffa7d570-418f-4f37-9f12-b23925674ac6" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>TalkTimer</DisplayName>
     <PublisherDisplayName>Ryan Clarke</PublisherDisplayName>
