@@ -39,7 +39,7 @@ namespace TalkTimer
 
             _clock = new Clock(_minutes);
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 1);
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             _timer.Tick += timer_Tick;
 
             LargeNumberGroup.RenderTransform = new TranslateTransform();
@@ -53,7 +53,7 @@ namespace TalkTimer
 
         void timer_Tick(object sender, object e)
         {
-            _clock.ElapseSecond();
+            _clock.UpdateClock();
             UpdateCounterUI();
             if (_clock.IsInOvertime()) Finished(this, new EventArgs());
         }
@@ -80,6 +80,9 @@ namespace TalkTimer
             else if (_clock.IsAt(0))
             {
                 if (AlarmIsSet) Alarm.Play();
+            }
+            else if (_clock.IsInOvertime())
+            {
                 ColorBox.Background = new SolidColorBrush(Colors.Black);
             }
 
@@ -138,10 +141,10 @@ namespace TalkTimer
 
         public void Play()
         {
-            _clock.Set(_minutes);
-            _timer.Start();
             LargeNumberUpArrow.Visibility = Visibility.Collapsed;
             LargeNumberDownArrow.Visibility = Visibility.Collapsed;
+            _timer.Start();
+            _clock.Set(_minutes);
             UpdateCounterUI();
         }
 
@@ -154,6 +157,7 @@ namespace TalkTimer
         public void Resume()
         {
             _timer.Start();
+            _clock.Resume();
             UpdateCounterUI();
         }
 

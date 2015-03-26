@@ -1,14 +1,16 @@
-﻿namespace TalkTimer
+﻿using System;
+namespace TalkTimer
 {
     public class Clock
     {
         private const int SecondsPerMinute = 60;
 
-        private int _seconds;
+        private double _seconds;
+        private DateTime _target;
 
-        public int Raw { get { return _seconds; } }
-        public string Minutes { get { return ToWholeMinutes(_seconds).ToString("0"); } }
-        public string Seconds { get { return WithWholeMinutesRemoved(_seconds).ToString("00"); } }
+        public int Raw { get { return (int)_seconds; } }
+        public string Minutes { get { return ToWholeMinutes(Raw).ToString("0"); } }
+        public string Seconds { get { return WithWholeMinutesRemoved(Raw).ToString("00"); } }
 
         public Clock(int minutes, int seconds = 0)
         {
@@ -18,11 +20,17 @@
         public void Set(int minutes, int seconds = 0)
         {
             _seconds = ToRaw(minutes, seconds);
+            _target = DateTime.Now.AddSeconds(_seconds);
         }
 
-        public void ElapseSecond()
+        public void UpdateClock()
         {
-            _seconds--;
+            _seconds = (_target - DateTime.Now).TotalSeconds;
+        }
+
+        public void Resume()
+        {
+            _target = DateTime.Now.AddSeconds(_seconds);
         }
 
         public bool IsAt(int minutes, int seconds = 0)
