@@ -8,12 +8,10 @@
              FontFamily="Monospace"
              d:DesignHeight="900"
              d:DesignWidth="1366">
-    
+
     <UserControl.Resources>
-        <SolidColorBrush x:Name="AboutBackground" Color="#EE222222" />
-        <SolidColorBrush x:Name="AboutSubtleBackground" Color="#44FFFFFF" />
-        <SolidColorBrush x:Name="AboutHeader" Color="#55FFFFFF" />
-        <SolidColorBrush x:Name="Arrow" Color="#22FFFFFF" />
+        <SolidColorBrush x:Name="Arrow"
+                         Color="#22FFFFFF" />
         <MediaElement x:Name="Alarm"
                       AudioCategory="SoundEffects"
                       Source="Assets/Metal_Gong.mp3"
@@ -25,7 +23,7 @@
         <Viewbox Stretch="Uniform"
                  StretchDirection="Both"
                  HorizontalAlignment="Center"
-                 VerticalAlignment="Top">
+                 VerticalAlignment="Center">
             <Grid>
                 <StackPanel Orientation="Horizontal"
                             Margin="300,0,300,-100">
@@ -84,89 +82,19 @@
                 </StackPanel>
             </Grid>
         </Viewbox>
-        <Viewbox Stretch="Uniform"
+        <Viewbox x:Name="PlayerControlViewbox"
+                 Stretch="Uniform"
                  StretchDirection="Both"
                  HorizontalAlignment="Right"
                  VerticalAlignment="Center">
             <local:PlayerControl x:Name="PlayerControls" />
         </Viewbox>
-        <Viewbox Stretch="Uniform"
+        <Viewbox x:Name="AboutContentViewbox"
+                 Stretch="Uniform"
                  StretchDirection="Both"
                  HorizontalAlignment="Left"
                  VerticalAlignment="Bottom">
-            <Grid Height="500">
-                <StackPanel x:Name="AboutPanel"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Background="{StaticResource AboutSubtleBackground}"
-                            Margin="32">
-                    <StackPanel x:Name="AboutDetail"
-                                Visibility="Collapsed"
-                                Margin="32,24,32,12">
-                        <TextBlock Text="version"
-                                   Margin="0,-12,0,0"
-                                   TextWrapping="Wrap"
-                                   Foreground="{StaticResource AboutHeader}"
-                                   Style="{StaticResource SubheaderTextBlockStyle}" />
-                        <TextBlock TextWrapping="Wrap"
-                                   Style="{StaticResource BaseTextBlockStyle}">
-                            <Run Text="v" />
-                            <Run x:Name="VersionNumber" />
-                        </TextBlock>
-                        <TextBlock Text="acknowledgements"
-                                   Margin="0,12,0,0"
-                                    TextWrapping="Wrap"
-                                    Foreground="{StaticResource AboutHeader}"
-                                    Style="{StaticResource SubheaderTextBlockStyle}" />
-                        <TextBlock TextWrapping="Wrap"
-                                    Style="{StaticResource BaseTextBlockStyle}">
-                            <Run Text="• Mike Mumau, who inspired me" />
-                            <LineBreak />
-                            <Run Text="    to start hosting lightning talks" />
-                            <LineBreak />
-                            <Run Text="• My wife, for guidance on colors" />
-                            <LineBreak />
-                            <Run Text="• Templarian, for" />
-                            <Hyperlink NavigateUri="http://modernuiicons.com">
-                                <Hyperlink.Inlines>
-                                    <Run Text="ModernUIIcons.com" />
-                                </Hyperlink.Inlines>
-                            </Hyperlink>
-                        </TextBlock>
-                        <TextBlock Text="support"
-                                   Margin="0,12,0,6"
-                                   TextWrapping="Wrap"
-                                   Foreground="{StaticResource AboutHeader}"
-                                   Style="{StaticResource SubheaderTextBlockStyle}" />
-                        <StackPanel Orientation="Horizontal"
-                                    Tapped="Twitter_Tapped">
-                            <Image Source="/Assets/appbar.social.twitter.png"
-                                   Width="40"
-                                   Height="40"
-                                   Margin="-8,0,8,0" />
-                            <HyperlinkButton Content="@RyanSClarke"
-                                             Foreground="DodgerBlue"
-                                             HorizontalAlignment="Left" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    Tapped="Email_Tapped">
-                            <Image Source="/Assets/appbar.email.png"
-                                   Width="40"
-                                   Height="40"
-                                   Margin="-8,0,8,0" />
-                            <HyperlinkButton Content="ryan@ryanclarke.net"
-                                             Foreground="DodgerBlue"
-                                             HorizontalAlignment="Left" />
-                        </StackPanel>
-                    </StackPanel>
-                    <Image x:Name="iIcon"
-                           Source="/Assets/appbar.information.png"
-                           Tapped="iIcon_Tapped"
-                           HorizontalAlignment="Left"
-                           Width="72"
-                           Height="72" />
-                </StackPanel>
-            </Grid>
+            <local:AboutControl />
         </Viewbox>
     </Grid>
 </UserControl>

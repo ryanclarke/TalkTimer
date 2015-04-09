@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
@@ -35,8 +36,6 @@ namespace TalkTimer
         {
             this.InitializeComponent();
 
-            VersionNumber.Text = CustomAttributeExtensions.GetCustomAttribute<AssemblyFileVersionAttribute>(typeof(App).GetTypeInfo().Assembly).Version;
-
             _clock = new Clock(_minutes);
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
@@ -48,7 +47,27 @@ namespace TalkTimer
             PlayerControls.Setup(this);
             Finished += (s, e) => { };
 
+            DisplayInformation.GetForCurrentView().OrientationChanged += (s, e) => ArrangeViewForOrientation();
+            
+            ArrangeViewForOrientation();
+
             UpdateCounterUI();
+        }
+
+        private void ArrangeViewForOrientation()
+        {
+            var orientation = DisplayInformation.GetForCurrentView().CurrentOrientation;
+            PlayerControls.ArrangeViewForOrientation(orientation);
+            if (orientation == DisplayOrientations.Portrait || orientation == DisplayOrientations.PortraitFlipped)
+            {
+                PlayerControlViewbox.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
+                PlayerControlViewbox.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
+            }
+            else
+            {
+                PlayerControlViewbox.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
+                PlayerControlViewbox.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
+            }
         }
 
         void timer_Tick(object sender, object e)
@@ -168,30 +187,6 @@ namespace TalkTimer
             LargeNumberUpArrow.Visibility = Visibility.Visible;
             LargeNumberDownArrow.Visibility = Visibility.Visible;
             UpdateCounterUI();
-        }
-
-        private void Twitter_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("https://twitter.com/RyanSClarke", UriKind.Absolute));
-        }
-
-        private void Email_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            Windows.System.Launcher.LaunchUriAsync(new Uri("mailto:ryan+talktimer@ryanclarke.net?Subject=TalkTimer", UriKind.Absolute));
-        }
-
-        private void iIcon_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (AboutDetail.Visibility == Visibility.Visible)
-            {
-                AboutDetail.Visibility = Visibility.Collapsed;
-                AboutPanel.Background = AboutSubtleBackground;
-            }
-            else
-            {
-                AboutDetail.Visibility = Visibility.Visible;
-                AboutPanel.Background = AboutBackground;
-            }
         }
     }
 

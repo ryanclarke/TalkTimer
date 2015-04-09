@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,6 +36,18 @@ namespace TalkTimer
                 _isFinished = true;
                 StopButton.Visibility = Visibility.Visible;
             };
+        }
+
+        public void ArrangeViewForOrientation(DisplayOrientations orientation)
+        {
+            if (orientation == DisplayOrientations.Portrait || orientation == DisplayOrientations.PortraitFlipped)
+            {
+                PlayerStackPanel.Orientation = Orientation.Horizontal;
+            }
+            else
+            {
+                PlayerStackPanel.Orientation = Orientation.Vertical;
+            }
         }
 
         private void PlayButton_Tapped(object sender, TappedRoutedEventArgs e)
