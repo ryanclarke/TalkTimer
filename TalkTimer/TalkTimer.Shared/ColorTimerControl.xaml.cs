@@ -61,7 +61,7 @@ namespace TalkTimer
             if (orientation == DisplayOrientations.Portrait || orientation == DisplayOrientations.PortraitFlipped)
             {
                 PlayerControlViewbox.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
-                PlayerControlViewbox.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;
+                PlayerControlViewbox.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Bottom;
             }
             else
             {

@@ -43,11 +43,17 @@ namespace TalkTimer
             {
                 AboutDetail.Visibility = Visibility.Collapsed;
                 AboutPanel.Background = AboutSubtleBackground;
+
+                iInfo.Text = "i";
+                iInfoContainer.Width = 72;
             }
             else
             {
                 AboutDetail.Visibility = Visibility.Visible;
                 AboutPanel.Background = AboutBackground;
+
+                iInfo.Text = "info";
+                iInfoContainer.Width = 120;
             }
         }
     }
